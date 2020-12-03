@@ -448,3 +448,237 @@ Processing by UsersController#index as */*
 Completed 200 OK in 11ms (Views: 3.0ms | ActiveRecord: 6.9ms)
 
 
+Started POST "/users?name=Andy&email=andy@aa.com" for ::1 at 2020-12-03 14:24:01 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Andy", "email"=>"andy@aa.com"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/users?user[name]=Andy&user[email]=andy@aa.com" for ::1 at 2020-12-03 14:24:44 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Andy", "email"=>"andy@aa.com"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Andy"], ["email", "andy@aa.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 7.3ms)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users?banana[name]=AndyA&banana[email]=andy@aa.com" for ::1 at 2020-12-03 14:26:13 -0500
+Processing by UsersController#create as */*
+  Parameters: {"banana"=>{"name"=>"AndyA", "email"=>"andy@aa.com"}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/users?banana[name]=AndyA&banana[email]=andy@aa.com" for ::1 at 2020-12-03 14:26:31 -0500
+Processing by UsersController#create as */*
+  Parameters: {"banana"=>{"name"=>"AndyA", "email"=>"andy@aa.com"}}
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "AndyA"], ["email", "andy@aa.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 6.5ms)
+
+
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users?banana[name]=bananaaa&banana[email]=andy@aa.com" for ::1 at 2020-12-03 14:28:29 -0500
+Processing by UsersController#create as */*
+  Parameters: {"banana"=>{"name"=>"bananaaa", "email"=>"andy@aa.com"}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/users?user[name]=bananaaa" for ::1 at 2020-12-03 14:28:52 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"bananaaa"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "bananaaa"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 4.6ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "email" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (6, bananaaa, null).
+: INSERT INTO "users" ("name") VALUES ($1) RETURNING "id"):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users?user[name]=bananaaa&user[email]=" for ::1 at 2020-12-03 14:29:25 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"bananaaa", "email"=>""}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "bananaaa"], ["email", ""]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/users?user[name]=bananaaa" for ::1 at 2020-12-03 14:29:46 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"bananaaa"}}
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "bananaaa"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 2.1ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "email" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (8, bananaaa, null).
+: INSERT INTO "users" ("name") VALUES ($1) RETURNING "id"):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users?user[name]=bananaaa&user[email]=ba@nana.com" for ::1 at 2020-12-03 14:30:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"bananaaa", "email"=>"ba@nana.com"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "bananaaa"], ["email", "ba@nana.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/users?user[name]=bananaaa" for ::1 at 2020-12-03 14:30:38 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"bananaaa"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "bananaaa"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 1.0ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "email" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (10, bananaaa, null).
+: INSERT INTO "users" ("name") VALUES ($1) RETURNING "id"):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users" for ::1 at 2020-12-03 14:35:56 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"ara", "email"=>"hey@hey.com"}}
+  [1m[35m (3.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "ara"], ["email", "hey@hey.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 16ms (Views: 0.5ms | ActiveRecord: 7.1ms)
+
+
+Started POST "/users" for ::1 at 2020-12-03 14:36:02 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"ara"}}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "ara"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 2.2ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "email" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (12, ara, null).
+: INSERT INTO "users" ("name") VALUES ($1) RETURNING "id"):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users" for ::1 at 2020-12-03 14:38:58 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/dad/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"ara", "email"=>"hey@hey.com"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "ara"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (5.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hey@hey.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 422 Unprocessable Entity in 30ms (Views: 0.2ms | ActiveRecord: 7.9ms)
+
+
+Started POST "/users" for ::1 at 2020-12-03 14:39:35 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/dad/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"ara", "email"=>"hey@hey.com"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email") VALUES ($1, $2) RETURNING "id"[0m  [["name", "ara"], ["email", "hey@hey.com"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 6.0ms)
+
+
+Started POST "/users" for ::1 at 2020-12-03 14:41:05 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/dad/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"sammy"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "sammy"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "sammy"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 4.1ms)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "email" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (14, sammy, null).
+: INSERT INTO "users" ("name") VALUES ($1) RETURNING "id"):
+  
+app/controllers/users_controller.rb:9:in `create'
+Started POST "/users" for ::1 at 2020-12-03 14:42:17 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/dad/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"sammy"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "sammy"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 422 Unprocessable Entity in 13ms (Views: 0.2ms | ActiveRecord: 2.7ms)
+
+
